@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"R"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>011D0B40</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"G"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>011D0B44</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"B"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>011D0B48</Address>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>
