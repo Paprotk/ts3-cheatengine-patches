@@ -1,0 +1,54 @@
+//===========Split Level Lighting Fix===========
+// The Sims 3 PC 1.67 STEAM
+//
+// Disables the extra light+0xC0 gate used by
+// CollectLightsForRig.
+//
+// Target:
+//   FUN_006bc020
+//
+// Original:
+//   mov eax,[ecx+0C0]
+//   mov edx,[ecx+0C4]
+//   ret
+//
+// Patched:
+//   xor eax,eax
+//   xor edx,edx
+//   ret
+//==================================================
+
+[ENABLE]
+
+assert(TS3W.exe+2BC020,8B 81 C0 00 00 00 8B 91 C4 00 00 00 C3)
+
+alloc(newmem,64,TS3W.exe)
+
+label(original)
+
+newmem:
+xor eax,eax
+xor edx,edx
+ret
+
+original:
+TS3W.exe+2BC020:
+jmp newmem
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+
+registersymbol(original)
+
+[DISABLE]
+
+TS3W.exe+2BC020:
+db 8B 81 C0 00 00 00 8B 91 C4 00 00 00 C3
+
+unregistersymbol(original)
+dealloc(newmem)
