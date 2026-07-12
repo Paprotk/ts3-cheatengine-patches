@@ -1,0 +1,58 @@
+//===========All Lights As World Lights========================
+// The Sims 3 PC 1.67 STEAM
+//
+// CollectLightsForRig() only adds a light to a rig if a
+// per-class virtual call (vtable slot 8, vtable+0x20)
+// returns true. Every light class points that slot at the
+// same "always false" stub (0x00620D60) except
+// Sims3::Renderer::WorldLight (LightType 0xB), which is why
+// only lamp-post style world lights ever get collected.
+//
+// Fix: repoint vtable+0x20 to WorldLight's own "always true"
+// function (0x007EAEA0) for every class except SquareWindow
+// and CircleWindow, they use an uninitialized position field
+// that is broken once collected into a rig.
+//
+// Targets (vtable+0x20 per class):
+//   BareBulb              0x00FF42C0
+//   ShadedLamp            0x00FF4370
+//   TubeLight             0x00FF4488
+//   RectangleAreaLight    0x00FF44E0
+//   DiscAreaLight         0x00FF4538
+//   Spotlight             0x00FF4590
+//
+// Original (each): 60 0D 62 00   -> 0x00620D60 (always-false stub)
+// Patched  (each): A0 AE 7E 00   -> 0x007EAEA0 (always-true, WorldLight's own)
+//==================================================
+[ENABLE]
+assert(TS3W.exe+BF42C0,60 0D 62 00)
+TS3W.exe+BF42C0:
+db A0 AE 7E 00
+assert(TS3W.exe+BF4370,60 0D 62 00)
+TS3W.exe+BF4370:
+db A0 AE 7E 00
+assert(TS3W.exe+BF4488,60 0D 62 00)
+TS3W.exe+BF4488:
+db A0 AE 7E 00
+assert(TS3W.exe+BF44E0,60 0D 62 00)
+TS3W.exe+BF44E0:
+db A0 AE 7E 00
+assert(TS3W.exe+BF4538,60 0D 62 00)
+TS3W.exe+BF4538:
+db A0 AE 7E 00
+assert(TS3W.exe+BF4590,60 0D 62 00)
+TS3W.exe+BF4590:
+db A0 AE 7E 00
+[DISABLE]
+TS3W.exe+BF42C0:
+db 60 0D 62 00
+TS3W.exe+BF4370:
+db 60 0D 62 00
+TS3W.exe+BF4488:
+db 60 0D 62 00
+TS3W.exe+BF44E0:
+db 60 0D 62 00
+TS3W.exe+BF4538:
+db 60 0D 62 00
+TS3W.exe+BF4590:
+db 60 0D 62 00
