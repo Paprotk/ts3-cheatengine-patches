@@ -1,0 +1,7 @@
+[ENABLE]
+00B890D9:
+  cmp dword ptr [ecx+000001B4],00
+
+[DISABLE]
+00B890D9:
+  cmp dword ptr [ecx+000001B4],01
