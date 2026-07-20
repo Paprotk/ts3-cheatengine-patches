@@ -2,6 +2,12 @@
 00B890D9:
   cmp dword ptr [ecx+000001B4],00
 
+00B78AC9:
+  db 90 90 90
+
 [DISABLE]
 00B890D9:
   cmp dword ptr [ecx+000001B4],01
+
+00B78AC9:
+  db 88 4A 0F
