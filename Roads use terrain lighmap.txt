@@ -1,28 +1,10 @@
-//bFlags_address = *(RoadNetwork + 0x1C) + (chunkIndex * 0x10) + 0xF
+//Use with Always HD Terrain!
 
 [ENABLE]
 //NOP JZ to LAB_00b891aa so the game always use path A in RoadNetwork::Update
 00b890e0:
   db 90 90 90 90 90 90
-//Ignore bFlags for LOD0 visibility check
-00B78A01:
-  db 90 90
-//Ignore bFlags for LOD1 visibility check
-00B78A35:
-  db 90 90
-//Force LOD2 always hidden
-00B78A69:
-  db EB 0B
 
 [DISABLE]
 00b890e0:
   db 0F 84 C4 00 00 00
-
-00B78A01:
-  db 75 0B
-
-00B78A35:
-  db 75 0B
-
-00B78A69:
-  db 74 0B
