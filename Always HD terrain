@@ -1,0 +1,17 @@
+// They can be used separately with similar results, but keeping both is the most reliable option
+
+[ENABLE]
+// Bypasses the active flag check so terrain is always rendered as if it were active
+00C849DB:
+db 90 90
+
+// Bypasses the camera distance check so distant terrain never drops to low detail
+00C849E6:
+db 90 90
+
+[DISABLE]
+00C849DB:
+db 74 37
+
+00C849E6:
+db 76 2C
